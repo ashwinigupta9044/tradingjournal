@@ -46,7 +46,7 @@ app.use(
   cors({
 
     origin:
-    "https://tradingjournal-omega-two.vercel.app",
+    "https://tradingjournal-git-main-ashwiniguptaji-6091s-projects.vercel.app",
 
     credentials:true
 
