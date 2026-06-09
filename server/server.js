@@ -12,7 +12,6 @@ require("./config/db");
 
 
 
-
 // ======================
 // ENV CONFIG
 // ======================
@@ -21,13 +20,11 @@ dotenv.config();
 
 
 
-
 // ======================
 // CONNECT DATABASE
 // ======================
 
 connectDB();
-
 
 
 
@@ -40,6 +37,24 @@ express();
 
 
 
+// ======================
+// CORS
+// ======================
+
+app.use(
+
+  cors({
+
+    origin:
+    "https://tradingjournal-omega-two.vercel.app",
+
+    credentials:true
+
+  })
+
+);
+
+
 
 // ======================
 // MIDDLEWARE
@@ -47,16 +62,9 @@ express();
 
 app.use(
 
-  cors()
-
-);
-
-app.use(
-
   express.json()
 
 );
-
 
 
 
@@ -76,6 +84,27 @@ app.use(
 
 );
 
+
+
+// ======================
+// ROOT API
+// ======================
+
+app.get(
+
+  "/",
+
+  (req,res)=>{
+
+    res.send(
+
+      "🚀 Trading Journal API Running"
+
+    );
+
+  }
+
+);
 
 
 
@@ -104,7 +133,6 @@ app.get(
 
 
 
-
 // ======================
 // AUTH ROUTES
 // ======================
@@ -119,7 +147,6 @@ app.use(
   authRoutes
 
 );
-
 
 
 
@@ -140,7 +167,6 @@ app.use(
 
 
 
-
 // ======================
 // JOURNAL ROUTES
 // ======================
@@ -155,7 +181,6 @@ app.use(
   journalRoutes
 
 );
-
 
 
 
@@ -176,7 +201,6 @@ app.use(
 
 
 
-
 // ======================
 // PAYMENT ROUTES
 // ======================
@@ -191,7 +215,6 @@ app.use(
   paymentRoutes
 
 );
-
 
 
 
@@ -249,7 +272,6 @@ app.use(
   }
 
 );
-
 
 
 
