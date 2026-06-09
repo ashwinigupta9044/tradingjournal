@@ -3,9 +3,13 @@ import { useState } from "react";
 import { useNavigate, Link }
 from "react-router-dom";
 
-import axios from "axios";
+import api from "../../services/api";
 
 export default function LoginForm() {
+
+  // =========================
+  // NAVIGATE
+  // =========================
 
   const navigate =
   useNavigate();
@@ -67,8 +71,10 @@ export default function LoginForm() {
 
     try {
 
+      // API
+
       const response =
-      await axios.post(
+      await api.post(
 
         "/api/auth/login",
 
@@ -116,11 +122,15 @@ export default function LoginForm() {
 
 
 
+      // SUCCESS
+
       alert(
         "Login Success ✅"
       );
 
 
+
+      // REDIRECT
 
       navigate(
         "/dashboard"
@@ -129,8 +139,11 @@ export default function LoginForm() {
     } catch (error) {
 
       console.log(
+
         error.response?.data ||
+
         error.message
+
       );
 
 
