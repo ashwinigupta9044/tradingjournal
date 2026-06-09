@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import logo from "../../assets/icon.png";
 
 import axios from "axios";
+import api from "../../services/api";
+
 
 import {
   useNavigate,
