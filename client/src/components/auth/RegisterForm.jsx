@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate }
 from "react-router-dom";
 
-import axios from "axios";
+import api from "../../services/api";
 
 export default function RegisterForm() {
 
@@ -72,8 +72,10 @@ export default function RegisterForm() {
 
     try {
 
+      // API
+
       const response =
-      await axios.post(
+      await api.post(
 
         "/api/auth/register",
 
@@ -106,8 +108,11 @@ export default function RegisterForm() {
     } catch (error) {
 
       console.log(
+
         error.response?.data ||
+
         error.message
+
       );
 
 
