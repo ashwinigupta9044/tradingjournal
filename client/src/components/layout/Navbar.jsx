@@ -1,17 +1,15 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
-
 
 import { useNavigate } from "react-router-dom";
 
 import ThemeToggle from "./ThemeToggle";
 
+
+
 export default function Navbar() {
-
-
-
 
   // =========================
   // STATES
@@ -38,39 +36,12 @@ export default function Navbar() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
-      // API
-
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/profile",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/profile"
 
       );
-
 
 
 
@@ -107,8 +78,6 @@ export default function Navbar() {
 
 
 
-
-    // REALTIME REFRESH
 
     const interval =
 
@@ -147,13 +116,19 @@ export default function Navbar() {
 
 
 
+    localStorage.removeItem(
+
+      "userId"
+
+    );
+
+
 
     alert(
 
       "Logged Out ✅"
 
     );
-
 
 
 
@@ -189,21 +164,28 @@ export default function Navbar() {
 
           Welcome back trader 👋
 
-        </p>       
+        </p>
+
       </div>
 
-      <div className="inline-flex items-center gap-3 bg-purple-500/10 border border-purple-500/20 px-5 py-3 rounded-2xl ">
 
-              <span className="w-3 h-3 bg-green-400 rounded-full" />
 
-              <span className="text-purple-300">
 
-                Smart Trading Journal Platform <br/>
-                Powered by Raftar Trader FX
+      {/* CENTER */}
 
-              </span>
+      <div className="inline-flex items-center gap-3 bg-purple-500/10 border border-purple-500/20 px-5 py-3 rounded-2xl">
 
-            </div>
+        <span className="w-3 h-3 bg-green-400 rounded-full" />
+
+        <span className="text-purple-300">
+
+          Smart Trading Journal Platform <br />
+
+          Powered by Raftar Trader FX
+
+        </span>
+
+      </div>
 
 
 
@@ -219,9 +201,18 @@ export default function Navbar() {
 
         <ThemeToggle />
 
-         {/* Home */}
 
-           <a href="/" >Home</a>
+
+
+        {/* HOME */}
+
+        <a href="/">
+
+          Home
+
+        </a>
+
+
 
 
         {/* MT5 */}
@@ -259,17 +250,21 @@ export default function Navbar() {
             {/* AVATAR */}
 
             <img
+
               src={
 
                 profile?.avatar
 
-                ? `/${profile.avatar}`
+                ? `${import.meta.env.VITE_API_URL}/${profile.avatar}`
 
                 : "/avatar.png"
 
               }
+
               alt="avatar"
+
               className="w-10 h-10 rounded-full object-cover"
+
             />
 
 
@@ -281,7 +276,9 @@ export default function Navbar() {
 
               <h4 className="font-semibold">
 
-                {profile?.fullName ||
+                {
+
+                  profile?.fullName ||
 
                   ""
 
@@ -291,7 +288,9 @@ export default function Navbar() {
 
               <p className="text-xs text-gray-400">
 
-                {profile?.accountType ||
+                {
+
+                  profile?.accountType ||
 
                   ""
 
@@ -374,6 +373,8 @@ export default function Navbar() {
       </div>
 
     </div>
+
   );
 
 }
+

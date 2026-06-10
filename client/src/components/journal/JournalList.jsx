@@ -1,14 +1,13 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
 
 import JournalCard from "./JournalCard";
 
+
+
 export default function JournalList() {
-
-
-
 
   // =========================
   // STATES
@@ -32,36 +31,14 @@ export default function JournalList() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/journals",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/journals"
 
       );
 
@@ -85,7 +62,13 @@ export default function JournalList() {
 
     }catch(error){
 
-      console.log(error);
+      console.log(
+
+        error.response?.data ||
+
+        error.message
+
+      );
 
     }finally{
 
@@ -173,6 +156,10 @@ export default function JournalList() {
 
           journal={journal}
 
+          refreshJournals={
+            fetchJournals
+          }
+
         />
 
       ))}
@@ -182,3 +169,4 @@ export default function JournalList() {
   );
 
 }
+

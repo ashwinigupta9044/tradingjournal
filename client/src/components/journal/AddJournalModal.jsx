@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
+
+
 
 export default function AddJournalModal({
 
@@ -9,9 +11,6 @@ export default function AddJournalModal({
   refreshJournals,
 
 }) {
-
-
-
 
   // =========================
   // STATES
@@ -64,9 +63,15 @@ export default function AddJournalModal({
 
     setLoading(true);
 
+
+
     try{
 
-      await axios.post(
+      // =========================
+      // API
+      // =========================
+
+      await api.post(
 
         "/api/journals",
 
@@ -83,11 +88,21 @@ export default function AddJournalModal({
 
           tags:
           formData.tags
-          .split(","),
+          .split(",")
+
+          .map((tag)=>
+
+            tag.trim()
+
+          )
+
+          .filter(Boolean),
 
         }
 
       );
+
+
 
       alert(
 
@@ -95,15 +110,37 @@ export default function AddJournalModal({
 
       );
 
-      refreshJournals();
+
+
+      // REFRESH
+
+      if(refreshJournals){
+
+        refreshJournals();
+
+      }
+
+
+
+      // CLOSE
 
       closeModal();
 
     }catch(error){
 
-      console.log(error);
+      console.log(
+
+        error.response?.data ||
+
+        error.message
+
+      );
+
+
 
       alert(
+
+        error.response?.data?.message ||
 
         "Journal Save Failed"
 
@@ -129,6 +166,9 @@ export default function AddJournalModal({
         onSubmit={handleSubmit}
 
         className="w-full max-w-3xl bg-[#0b1120] border border-white/10 rounded-3xl p-8">
+
+
+
 
         {/* HEADER */}
 
@@ -167,6 +207,7 @@ export default function AddJournalModal({
           </button>
 
         </div>
+
 
 
 
@@ -264,6 +305,7 @@ export default function AddJournalModal({
 
 
 
+
         {/* BUTTONS */}
 
         <div className="flex justify-end gap-4 mt-8">
@@ -290,7 +332,9 @@ export default function AddJournalModal({
 
             className="px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-700 transition-all">
 
-            {loading
+            {
+
+              loading
 
               ? "Saving..."
 
@@ -309,3 +353,4 @@ export default function AddJournalModal({
   );
 
 }
+

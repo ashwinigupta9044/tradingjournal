@@ -1,11 +1,13 @@
+
+// =========================
+// subscriptionService.js
+// =========================
+
 import api from "./api";
 
 
 
-
-// =========================
 // GET SUBSCRIPTION
-// =========================
 
 export const getSubscription =
 async()=>{
@@ -16,10 +18,9 @@ async()=>{
 
     await api.get(
 
-      "/subscription"
+      "/api/subscription"
 
     );
-
 
 
 
@@ -39,7 +40,6 @@ async()=>{
 
 
 
-
     throw error;
 
   }
@@ -48,10 +48,7 @@ async()=>{
 
 
 
-
-// =========================
 // CREATE SUBSCRIPTION
-// =========================
 
 export const createSubscription =
 async(subscriptionData)=>{
@@ -62,12 +59,11 @@ async(subscriptionData)=>{
 
     await api.post(
 
-      "/subscription",
+      "/api/subscription",
 
       subscriptionData
 
     );
-
 
 
 
@@ -87,7 +83,6 @@ async(subscriptionData)=>{
 
 
 
-
     throw error;
 
   }
@@ -96,10 +91,7 @@ async(subscriptionData)=>{
 
 
 
-
-// =========================
 // CANCEL SUBSCRIPTION
-// =========================
 
 export const cancelSubscription =
 async(id)=>{
@@ -110,10 +102,9 @@ async(id)=>{
 
     await api.delete(
 
-      `/subscription/${id}`
+      `/api/subscription/${id}`
 
     );
-
 
 
 
@@ -133,7 +124,6 @@ async(id)=>{
 
 
 
-
     throw error;
 
   }
@@ -142,10 +132,7 @@ async(id)=>{
 
 
 
-
-// =========================
 // BILLING HISTORY
-// =========================
 
 export const getBillingHistory =
 async()=>{
@@ -156,10 +143,9 @@ async()=>{
 
     await api.get(
 
-      "/subscription/history"
+      "/api/subscription/history"
 
     );
-
 
 
 
@@ -179,9 +165,9 @@ async()=>{
 
 
 
-
     throw error;
 
   }
 
 };
+

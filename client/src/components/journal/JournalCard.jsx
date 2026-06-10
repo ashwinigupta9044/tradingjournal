@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
+
+
 
 export default function JournalCard({
 
@@ -9,9 +11,6 @@ export default function JournalCard({
   refreshJournals,
 
 }) {
-
-
-
 
   // =========================
   // STATES
@@ -83,7 +82,6 @@ export default function JournalCard({
 
 
 
-
     if(!confirmDelete){
 
       return;
@@ -92,41 +90,17 @@ export default function JournalCard({
 
 
 
-
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // DELETE API
+      // =========================
 
-      await axios.delete(
+      await api.delete(
 
-        `/api/journals/${journal._id}`,
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        `/api/journals/${journal._id}`
 
       );
-
 
 
 
@@ -138,10 +112,13 @@ export default function JournalCard({
 
 
 
-
       // REFRESH
 
-      refreshJournals();
+      if(refreshJournals){
+
+        refreshJournals();
+
+      }
 
     }catch(error){
 
@@ -152,7 +129,6 @@ export default function JournalCard({
         error.message
 
       );
-
 
 
 
@@ -182,22 +158,11 @@ export default function JournalCard({
 
 
 
-
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // SAFE TAGS
+      // =========================
 
       const formattedTags =
 
@@ -216,11 +181,12 @@ export default function JournalCard({
 
 
 
-
+      // =========================
       // UPDATE API
+      // =========================
 
       const response =
-      await axios.put(
+      await api.put(
 
         `/api/journals/${journal._id}`,
 
@@ -238,22 +204,9 @@ export default function JournalCard({
           tags:
           formattedTags,
 
-        },
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
         }
 
       );
-
 
 
 
@@ -265,7 +218,6 @@ export default function JournalCard({
 
 
 
-
       alert(
 
         "Journal Updated ✅"
@@ -274,15 +226,17 @@ export default function JournalCard({
 
 
 
-
       setIsEditing(false);
-
 
 
 
       // REFRESH
 
-      refreshJournals();
+      if(refreshJournals){
+
+        refreshJournals();
+
+      }
 
     }catch(error){
 
@@ -293,7 +247,6 @@ export default function JournalCard({
         error.message
 
       );
-
 
 
 
@@ -533,7 +486,9 @@ export default function JournalCard({
 
               className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-2xl font-semibold">
 
-              {loading
+              {
+
+                loading
 
                 ? "Saving..."
 
@@ -610,3 +565,4 @@ export default function JournalCard({
   );
 
 }
+

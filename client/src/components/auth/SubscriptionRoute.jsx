@@ -12,7 +12,6 @@ import {
 
 } from "react-router-dom";
 
-import axios from "axios";
 import api from "../../services/api";
 
 
@@ -23,80 +22,85 @@ export default function SubscriptionRoute({
 
   children,
 
-}){
+}) {
 
-  const [loading,setLoading] =
+  // =========================
+  // STATES
+  // =========================
+
+  const [loading, setLoading] =
   useState(true);
 
-  const [allowed,setAllowed] =
+  const [allowed, setAllowed] =
   useState(false);
 
 
 
 
-  useEffect(()=>{
+  // =========================
+  // LOAD
+  // =========================
+
+  useEffect(() => {
 
     checkSubscription();
 
-  },[]);
+  }, []);
 
 
 
+
+  // =========================
+  // CHECK SUBSCRIPTION
+  // =========================
 
   const checkSubscription =
-  async()=>{
+  async () => {
 
-    try{
+    try {
 
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
+      // =========================
+      // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/subscription",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/subscription"
 
       );
 
 
 
 
-      if(
+      // =========================
+      // ACTIVE CHECK
+      // =========================
+
+      if (
 
         response.data.status ===
-
         "Active"
 
-      ){
+      ) {
 
         setAllowed(true);
 
       }
 
-    }catch(error){
+    } catch (error) {
 
-      console.log(error);
+      console.log(
 
-    }finally{
+        "SUBSCRIPTION ERROR:",
+
+        error.response?.data ||
+
+        error.message
+
+      );
+
+    } finally {
 
       setLoading(false);
 
@@ -107,9 +111,13 @@ export default function SubscriptionRoute({
 
 
 
-  if(loading){
+  // =========================
+  // LOADING SCREEN
+  // =========================
 
-    return(
+  if (loading) {
+
+    return (
 
       <div className="h-screen flex items-center justify-center bg-[#050816] text-white">
 
@@ -124,7 +132,11 @@ export default function SubscriptionRoute({
 
 
 
-  if(!allowed){
+  // =========================
+  // NO SUBSCRIPTION
+  // =========================
+
+  if (!allowed) {
 
     return <Navigate to="/subscription" />;
 
@@ -132,6 +144,10 @@ export default function SubscriptionRoute({
 
 
 
+
+  // =========================
+  // ACCESS GRANTED
+  // =========================
 
   return children;
 

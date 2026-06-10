@@ -1,15 +1,16 @@
+
 import { useEffect, useState } from "react";
 
 import logo from "../../assets/icon.png";
 
-import axios from "axios";
 import api from "../../services/api";
-
 
 import {
   useNavigate,
   Link
 } from "react-router-dom";
+
+
 
 export default function HomeNavbar() {
 
@@ -26,11 +27,17 @@ export default function HomeNavbar() {
   const [mobileMenu, setMobileMenu] =
   useState(false);
 
+
+
   const navigate =
   useNavigate();
 
+
+
   const token =
   localStorage.getItem("token");
+
+
 
   const isLoggedIn =
   !!token;
@@ -47,18 +54,13 @@ export default function HomeNavbar() {
     try {
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/profile",
-
-        {
-          headers: {
-            Authorization:
-            `Bearer ${token}`
-          }
-        }
+        "/api/profile"
 
       );
+
+
 
       setProfile(
         response.data
@@ -96,6 +98,7 @@ export default function HomeNavbar() {
 
 
 
+
   // =========================
   // LOGOUT
   // =========================
@@ -106,9 +109,19 @@ export default function HomeNavbar() {
       "token"
     );
 
+
+
+    localStorage.removeItem(
+      "userId"
+    );
+
+
+
     alert(
       "Logged Out ✅"
     );
+
+
 
     navigate(
       "/login"
@@ -171,6 +184,8 @@ export default function HomeNavbar() {
             "
 
           />
+
+
 
           <span>
 
@@ -309,7 +324,7 @@ export default function HomeNavbar() {
 
                         profile?.avatar
 
-                        ? `/${profile.avatar}`
+                        ? `${import.meta.env.VITE_API_URL}/${profile.avatar}`
 
                         : "/avatar.png"
 
@@ -510,9 +525,7 @@ export default function HomeNavbar() {
 
 
 
-        {/* =========================
-            MOBILE MENU BUTTON
-        ========================= */}
+        {/* MOBILE BUTTON */}
 
         <button
 
@@ -533,174 +546,9 @@ export default function HomeNavbar() {
 
       </div>
 
-
-
-      {/* =========================
-          MOBILE MENU
-      ========================= */}
-
-      {
-
-        mobileMenu && (
-
-          <div className="
-          md:hidden
-          border-t border-white/10
-          px-4 py-5
-          space-y-5
-          bg-[#050816]
-          ">
-
-            <Link
-              to="/"
-              className="block hover:text-purple-400"
-            >
-
-              Home
-
-            </Link>
-
-
-
-            <Link
-              to="/feature"
-              className="block hover:text-purple-400"
-            >
-
-              Features
-
-            </Link>
-
-
-
-            <Link
-              to="/plan"
-              className="block hover:text-purple-400"
-            >
-
-              Pricing
-
-            </Link>
-
-
-
-            <a
-              href="#about"
-              className="block hover:text-purple-400"
-            >
-
-              About
-
-            </a>
-
-
-
-            <div className="
-            flex
-            flex-col
-            gap-4
-            pt-4
-            ">
-
-              {
-
-                isLoggedIn ? (
-
-                  <>
-
-                    <Link
-
-                      to="/dashboard"
-
-                      className="
-                      px-5 py-3
-                      rounded-2xl
-                      bg-purple-600
-                      text-center
-                      "
-
-                    >
-
-                      Dashboard
-
-                    </Link>
-
-
-
-                    <button
-
-                      onClick={handleLogout}
-
-                      className="
-                      px-5 py-3
-                      rounded-2xl
-                      bg-red-500
-                      "
-
-                    >
-
-                      Logout
-
-                    </button>
-
-                  </>
-
-                ) : (
-
-                  <>
-
-                    <Link
-
-                      to="/login"
-
-                      className="
-                      px-5 py-3
-                      rounded-2xl
-                      bg-white/10
-                      text-center
-                      "
-
-                    >
-
-                      Login
-
-                    </Link>
-
-
-
-                    <Link
-
-                      to="/register"
-
-                      className="
-                      px-5 py-3
-                      rounded-2xl
-                      bg-purple-600
-                      text-center
-                      "
-
-                    >
-
-                      Get Started
-
-                    </Link>
-
-                  </>
-
-                )
-
-              }
-
-            </div>
-
-          </div>
-
-        )
-
-      }
-
     </div>
 
   );
 
 }
+

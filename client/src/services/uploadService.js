@@ -1,71 +1,105 @@
+
 import api from "./api";
+
+
+
+// =========================
+// UPLOAD IMAGE
+// =========================
 
 export const uploadImage =
 async(file)=>{
 
   const formData =
-    new FormData();
+  new FormData();
+
+
 
   formData.append(
+
     "image",
+
     file
+
   );
 
+
+
   const response =
-    await api.post(
 
-      "/upload",
+  await api.post(
 
-      formData,
+    "/api/upload",
 
-      {
+    formData,
 
-        headers:{
+    {
 
-          "Content-Type":
-            "multipart/form-data",
+      headers:{
 
-        },
+        "Content-Type":
+        "multipart/form-data",
 
-      }
+      },
 
-    );
+    }
+
+  );
+
+
 
   return response.data;
 
 };
+
+
+
+// =========================
+// UPLOAD TRADE SCREENSHOT
+// =========================
 
 export const uploadTradeScreenshot =
 async(file)=>{
 
   const formData =
-    new FormData();
+  new FormData();
+
+
 
   formData.append(
+
     "screenshot",
+
     file
+
   );
 
+
+
   const response =
-    await api.post(
 
-      "/upload/trade",
+  await api.post(
 
-      formData,
+    "/api/upload/trade",
 
-      {
+    formData,
 
-        headers:{
+    {
 
-          "Content-Type":
-            "multipart/form-data",
+      headers:{
 
-        },
+        "Content-Type":
+        "multipart/form-data",
 
-      }
+      },
 
-    );
+    }
+
+  );
+
+
 
   return response.data;
 
 };
+

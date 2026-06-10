@@ -1,16 +1,15 @@
+
 import { useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
+
+
 
 export default function JournalEditor({
 
   refreshJournals,
 
 }) {
-
-
-
 
   // =========================
   // STATES
@@ -68,21 +67,11 @@ export default function JournalEditor({
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
-      await axios.post(
+      await api.post(
 
         "/api/journals",
 
@@ -108,18 +97,6 @@ export default function JournalEditor({
           )
 
           .filter(Boolean),
-
-        },
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
 
         }
 
@@ -161,7 +138,13 @@ export default function JournalEditor({
 
     }catch(error){
 
-      console.log(error);
+      console.log(
+
+        error.response?.data ||
+
+        error.message
+
+      );
 
 
 
@@ -330,7 +313,9 @@ export default function JournalEditor({
 
           className="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-2xl font-semibold transition-all duration-300">
 
-          {loading
+          {
+
+            loading
 
             ? "Saving..."
 
@@ -347,3 +332,4 @@ export default function JournalEditor({
   );
 
 }
+
