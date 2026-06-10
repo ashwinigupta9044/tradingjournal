@@ -1,13 +1,11 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
 
 
+
 export default function BrokerInfo() {
-
-
-
 
   // =========================
   // STATES
@@ -31,36 +29,14 @@ export default function BrokerInfo() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/profile",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/profile"
 
       );
 
@@ -76,7 +52,9 @@ export default function BrokerInfo() {
 
 
 
+      // =========================
       // AUTO CREATE BROKER CARD
+      // =========================
 
       if(response.data){
 
@@ -202,9 +180,6 @@ export default function BrokerInfo() {
 
       <div className="space-y-5">
 
-
-
-
         {brokers.length > 0 ? (
 
           brokers.map((broker,index)=>(
@@ -284,3 +259,4 @@ export default function BrokerInfo() {
   );
 
 }
+

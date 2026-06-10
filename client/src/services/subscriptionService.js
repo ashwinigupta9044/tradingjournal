@@ -18,7 +18,7 @@ async()=>{
 
     await api.get(
 
-      "/api/subscription"
+      "/subscription"
 
     );
 
@@ -59,7 +59,7 @@ async(subscriptionData)=>{
 
     await api.post(
 
-      "/api/subscription",
+      "/subscription",
 
       subscriptionData
 
@@ -102,7 +102,7 @@ async(id)=>{
 
     await api.delete(
 
-      `/api/subscription/${id}`
+      `/subscription/${id}`
 
     );
 
@@ -143,7 +143,7 @@ async()=>{
 
     await api.get(
 
-      "/api/subscription/history"
+      "/subscription/history"
 
     );
 

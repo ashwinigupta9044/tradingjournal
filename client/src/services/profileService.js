@@ -14,7 +14,7 @@ async()=>{
 
   await api.get(
 
-    "/api/profile"
+    "/profile"
 
   );
 
@@ -37,7 +37,7 @@ async(profileData)=>{
 
   await api.put(
 
-    "/api/profile",
+    "/profile",
 
     profileData
 
@@ -62,7 +62,7 @@ async(formData)=>{
 
   await api.post(
 
-    "/api/profile/avatar",
+    "/profile/avatar",
 
     formData,
 

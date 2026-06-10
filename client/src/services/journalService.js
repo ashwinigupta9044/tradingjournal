@@ -14,7 +14,7 @@ async()=>{
 
   await api.get(
 
-    "/api/journals"
+    "/journals"
 
   );
 
@@ -37,7 +37,7 @@ async(journalData)=>{
 
   await api.post(
 
-    "/api/journals",
+    "/journals",
 
     journalData
 
@@ -62,7 +62,7 @@ async(id,journalData)=>{
 
   await api.put(
 
-    `/api/journals/${id}`,
+    `/journals/${id}`,
 
     journalData
 
@@ -87,7 +87,7 @@ async(id)=>{
 
   await api.delete(
 
-    `/api/journals/${id}`
+    `/journals/${id}`
 
   );
 

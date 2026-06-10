@@ -66,7 +66,7 @@ export default function SubscriptionRoute({
       const response =
       await api.get(
 
-        "/api/subscription"
+        "/subscription"
 
       );
 
@@ -138,7 +138,7 @@ export default function SubscriptionRoute({
 
   if (!allowed) {
 
-    return <Navigate to="/subscription" />;
+    return <Navigate to="/subscription" replace />;
 
   }
 

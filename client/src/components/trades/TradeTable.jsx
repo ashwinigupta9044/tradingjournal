@@ -1,8 +1,7 @@
+
 import { useState,useEffect } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
-
 
 import {
 
@@ -11,6 +10,8 @@ import {
   Plus,
 
 } from "lucide-react";
+
+
 
 export default function TradeTable() {
 
@@ -58,36 +59,10 @@ export default function TradeTable() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
-      // API
-
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/trades",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/trades"
 
       );
 
@@ -257,35 +232,9 @@ export default function TradeTable() {
 
     try{
 
-      // TOKEN
+      await api.delete(
 
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
-      // API
-
-      await axios.delete(
-
-        `/api/trades/${id}`,
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        `/trades/${id}`
 
       );
 
@@ -359,18 +308,6 @@ export default function TradeTable() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
       // =====================
       // UPDATE TRADE
       // =====================
@@ -378,9 +315,9 @@ export default function TradeTable() {
       if(editId){
 
         const response =
-        await axios.put(
+        await api.put(
 
-          `/api/trades/${editId}`,
+          `/trades/${editId}`,
 
           {
 
@@ -407,18 +344,6 @@ export default function TradeTable() {
 
             lotsize:
             formData.lotsize,
-
-          },
-
-          {
-
-            headers:{
-
-              Authorization:
-
-              `Bearer ${token}`
-
-            }
 
           }
 
@@ -455,9 +380,9 @@ export default function TradeTable() {
       else{
 
         const response =
-        await axios.post(
+        await api.post(
 
-          "/api/trades",
+          "/trades",
 
           {
 
@@ -484,18 +409,6 @@ export default function TradeTable() {
 
             lotsize:
             formData.lotsize,
-
-          },
-
-          {
-
-            headers:{
-
-              Authorization:
-
-              `Bearer ${token}`
-
-            }
 
           }
 
@@ -558,10 +471,6 @@ export default function TradeTable() {
 
 
 
-
-  // =========================
-  // UI
-  // =========================
 
   return (
 
@@ -669,8 +578,6 @@ export default function TradeTable() {
 
 
 
-                {/* SYMBOL */}
-
                 <td className="py-6">
 
                   {trade.symbol}
@@ -680,8 +587,6 @@ export default function TradeTable() {
 
 
 
-                {/* SESSION */}
-
                 <td className="py-6 text-blue-400">
 
                   {trade.session}
@@ -690,8 +595,6 @@ export default function TradeTable() {
 
 
 
-
-                {/* SIDE */}
 
                 <td className={`py-6 font-bold
 
@@ -710,8 +613,6 @@ export default function TradeTable() {
 
 
 
-                {/* ENTRY */}
-
                 <td className="py-6">
 
                   {trade.entry}
@@ -721,8 +622,6 @@ export default function TradeTable() {
 
 
 
-                {/* EXIT */}
-
                 <td className="py-6">
 
                   {trade.exit}
@@ -731,8 +630,6 @@ export default function TradeTable() {
 
 
 
-
-                {/* PROFIT */}
 
                 <td className={`py-6 font-bold
 
@@ -751,8 +648,6 @@ export default function TradeTable() {
 
 
 
-                {/* Lot Size */}
-
                 <td className="py-6">
 
                   {trade.lotsize}
@@ -762,16 +657,12 @@ export default function TradeTable() {
 
 
 
-                {/* ACTIONS */}
-
                 <td className="py-6">
 
                   <div className="flex gap-3">
 
 
 
-
-                    {/* EDIT */}
 
                     <button
 
@@ -789,8 +680,6 @@ export default function TradeTable() {
 
 
 
-
-                    {/* DELETE */}
 
                     <button
 
@@ -858,8 +747,6 @@ export default function TradeTable() {
 
 
 
-              {/* SYMBOL */}
-
               <input
                 type="text"
                 name="symbol"
@@ -872,8 +759,6 @@ export default function TradeTable() {
 
 
 
-
-              {/* SESSION */}
 
               <select
                 name="session"
@@ -911,8 +796,6 @@ export default function TradeTable() {
 
 
 
-              {/* SIDE */}
-
               <select
                 name="side"
                 value={formData.side}
@@ -936,8 +819,6 @@ export default function TradeTable() {
 
 
 
-              {/* ENTRY */}
-
               <input
                 type="number"
                 name="entry"
@@ -950,8 +831,6 @@ export default function TradeTable() {
 
 
 
-
-              {/* EXIT */}
 
               <input
                 type="number"
@@ -966,8 +845,6 @@ export default function TradeTable() {
 
 
 
-              {/* PROFIT */}
-
               <input
                 type="number"
                 name="profit"
@@ -981,13 +858,11 @@ export default function TradeTable() {
 
 
 
-              {/* STRATEGY */}
-
               <input
                 type="text"
                 name="lotsize"
                 placeholder="Lot Size"
-                value={formData.strategy}
+                value={formData.lotsize}
                 onChange={handleChange}
                 required
                 className="w-full p-4 rounded-xl bg-black/20 border border-white/10 outline-none"
@@ -997,8 +872,6 @@ export default function TradeTable() {
 
 
 
-
-            {/* BUTTONS */}
 
             <div className="flex gap-4 mt-8">
 
@@ -1046,3 +919,4 @@ export default function TradeTable() {
   );
 
 }
+

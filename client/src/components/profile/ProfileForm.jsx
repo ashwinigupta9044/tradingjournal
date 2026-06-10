@@ -1,13 +1,11 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
 
 
+
 export default function ProfileForm() {
-
-
-
 
   // =========================
   // STATES
@@ -41,36 +39,14 @@ export default function ProfileForm() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/profile",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/profile"
 
       );
 
@@ -123,6 +99,10 @@ export default function ProfileForm() {
 
 
 
+  // =========================
+  // LOAD
+  // =========================
+
   useEffect(()=>{
 
     fetchProfile();
@@ -168,37 +148,15 @@ export default function ProfileForm() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
-      await axios.post(
+      await api.put(
 
         "/api/profile",
 
-        formData,
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        formData
 
       );
 
@@ -420,7 +378,9 @@ export default function ProfileForm() {
 
           className="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-2xl font-semibold transition-all">
 
-          {loading
+          {
+
+            loading
 
             ? "Saving..."
 
@@ -437,3 +397,4 @@ export default function ProfileForm() {
   );
 
 }
+

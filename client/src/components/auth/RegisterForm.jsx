@@ -1,9 +1,12 @@
+
 import { useState } from "react";
 
 import { Link, useNavigate }
 from "react-router-dom";
 
 import api from "../../services/api";
+
+
 
 export default function RegisterForm() {
 
@@ -23,7 +26,7 @@ export default function RegisterForm() {
   const [formData, setFormData] =
   useState({
 
-    name: "",
+    fullName: "",
     email: "",
     password: "",
 
@@ -72,12 +75,14 @@ export default function RegisterForm() {
 
     try {
 
+      // =========================
       // API
+      // =========================
 
       const response =
       await api.post(
 
-        "/api/auth/register",
+        "/auth/register",
 
         formData
 
@@ -91,7 +96,9 @@ export default function RegisterForm() {
 
 
 
+      // =========================
       // SUCCESS
+      // =========================
 
       alert(
         "Register Success ✅"
@@ -99,7 +106,9 @@ export default function RegisterForm() {
 
 
 
-      // REDIRECT LOGIN
+      // =========================
+      // REDIRECT
+      // =========================
 
       navigate(
         "/login"
@@ -185,17 +194,22 @@ export default function RegisterForm() {
 
         <div className="space-y-5">
 
-          {/* NAME */}
+
+
+
+          {/* FULL NAME */}
 
           <input
 
             type="text"
 
-            name="name"
+            name="fullName"
 
             placeholder="Full Name"
 
             required
+
+            value={formData.fullName}
 
             onChange={handleChange}
 
@@ -208,9 +222,11 @@ export default function RegisterForm() {
             outline-none
             focus:border-purple-500
             transition-all
+            text-white
             "
 
           />
+
 
 
 
@@ -226,6 +242,8 @@ export default function RegisterForm() {
 
             required
 
+            value={formData.email}
+
             onChange={handleChange}
 
             className="
@@ -237,9 +255,11 @@ export default function RegisterForm() {
             outline-none
             focus:border-purple-500
             transition-all
+            text-white
             "
 
           />
+
 
 
 
@@ -255,6 +275,8 @@ export default function RegisterForm() {
 
             required
 
+            value={formData.password}
+
             onChange={handleChange}
 
             className="
@@ -266,9 +288,11 @@ export default function RegisterForm() {
             outline-none
             focus:border-purple-500
             transition-all
+            text-white
             "
 
           />
+
 
 
 
@@ -305,6 +329,7 @@ export default function RegisterForm() {
             }
 
           </button>
+
 
 
 
@@ -353,3 +378,4 @@ export default function RegisterForm() {
   );
 
 }
+

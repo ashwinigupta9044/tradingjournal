@@ -16,7 +16,7 @@ async()=>{
 
   await api.get(
 
-    "/api/trades"
+    "/trades"
 
   );
 
@@ -37,7 +37,7 @@ async(id)=>{
 
   await api.get(
 
-    `/api/trades/${id}`
+    `/trades/${id}`
 
   );
 
@@ -58,7 +58,7 @@ async(tradeData)=>{
 
   await api.post(
 
-    "/api/trades",
+    "/trades",
 
     tradeData
 
@@ -81,7 +81,7 @@ async(id,tradeData)=>{
 
   await api.put(
 
-    `/api/trades/${id}`,
+    `/trades/${id}`,
 
     tradeData
 
@@ -104,7 +104,7 @@ async(id)=>{
 
   await api.delete(
 
-    `/api/trades/${id}`
+    `/trades/${id}`
 
   );
 

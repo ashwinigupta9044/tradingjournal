@@ -1,4 +1,7 @@
+
 import PaymentButton from "./PaymentButton";
+
+
 
 export default function PricingCard({
 
@@ -29,8 +32,13 @@ export default function PricingCard({
 
 
 
+  // =========================
+  // POPULAR PLAN
+  // =========================
+
   const isPremium =
-  title === "Premium";
+  title === "1 Year";
+
 
 
 
@@ -265,3 +273,4 @@ export default function PricingCard({
   );
 
 }
+

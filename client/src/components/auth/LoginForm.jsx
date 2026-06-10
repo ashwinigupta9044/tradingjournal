@@ -85,7 +85,7 @@ export default function LoginForm() {
       const response =
       await api.post(
 
-        "/api/auth/login",
+        "/auth/login",
 
         formData
 
@@ -232,6 +232,9 @@ export default function LoginForm() {
 
         <div className="space-y-5">
 
+
+
+
           {/* EMAIL */}
 
           <input
@@ -257,9 +260,11 @@ export default function LoginForm() {
             outline-none
             focus:border-purple-500
             transition-all
+            text-white
             "
 
           />
+
 
 
 
@@ -288,9 +293,11 @@ export default function LoginForm() {
             outline-none
             focus:border-purple-500
             transition-all
+            text-white
             "
 
           />
+
 
 
 
@@ -319,6 +326,7 @@ export default function LoginForm() {
             </Link>
 
           </div>
+
 
 
 
@@ -355,6 +363,7 @@ export default function LoginForm() {
             }
 
           </button>
+
 
 
 

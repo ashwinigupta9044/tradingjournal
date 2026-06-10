@@ -1,3 +1,4 @@
+
 const mongoose =
 require("mongoose");
 
@@ -10,11 +11,20 @@ new mongoose.Schema({
     required:true,
   },
 
-  title:String,
+  title:{
+    type:String,
+    required:true,
+  },
 
-  mood:String,
+  emotion:{
+    type:String,
+    required:true,
+  },
 
-  content:String,
+  content:{
+    type:String,
+    required:true,
+  },
 
   tags:[String],
 
@@ -30,3 +40,4 @@ mongoose.model(
   journalSchema
 
 );
+

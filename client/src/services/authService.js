@@ -16,7 +16,7 @@ async(userData)=>{
 
   await api.post(
 
-    "/api/auth/register",
+    "/auth/register",
 
     userData
 
@@ -53,7 +53,7 @@ async(userData)=>{
 
   await api.post(
 
-    "/api/auth/login",
+    "/auth/login",
 
     userData
 

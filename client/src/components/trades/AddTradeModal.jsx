@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
+
 
 
 export default function AddTradeModal({
@@ -73,34 +74,13 @@ export default function AddTradeModal({
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
-      console.log(
-
-        "TOKEN:",
-
-        token
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
-      await axios.post(
+      await api.post(
 
-        "/api/trades",
+        "/trades",
 
         {
 
@@ -125,18 +105,6 @@ export default function AddTradeModal({
           lotsize:
           formData.lotsize,
 
-        },
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
         }
 
       );
@@ -153,14 +121,18 @@ export default function AddTradeModal({
 
 
 
+      // =========================
       // REFRESH
+      // =========================
 
       refreshTrades();
 
 
 
 
-      // CLOSE
+      // =========================
+      // CLOSE MODAL
+      // =========================
 
       closeModal();
 
@@ -237,7 +209,7 @@ export default function AddTradeModal({
             value={formData.symbol}
             onChange={handleChange}
             required
-            className="p-4 rounded-xl bg-black/20 border border-white/10"
+            className="p-4 rounded-xl bg-black/20 border border-white/10 outline-none text-white"
           />
 
 
@@ -250,7 +222,7 @@ export default function AddTradeModal({
             value={formData.session}
             onChange={handleChange}
             required
-            className="p-4 rounded-xl bg-black/20 border border-white/10">
+            className="p-4 rounded-xl bg-black/20 border border-white/10 outline-none text-white">
 
             <option value="">
 
@@ -287,7 +259,7 @@ export default function AddTradeModal({
             name="side"
             value={formData.side}
             onChange={handleChange}
-            className="p-4 rounded-xl bg-black/20 border border-white/10">
+            className="p-4 rounded-xl bg-black/20 border border-white/10 outline-none text-white">
 
             <option value="BUY">
 
@@ -306,7 +278,7 @@ export default function AddTradeModal({
 
 
 
-          {/* STRATEGY */}
+          {/* LOT SIZE */}
 
           <input
             type="text"
@@ -315,7 +287,7 @@ export default function AddTradeModal({
             value={formData.lotsize}
             onChange={handleChange}
             required
-            className="p-4 rounded-xl bg-black/20 border border-white/10"
+            className="p-4 rounded-xl bg-black/20 border border-white/10 outline-none text-white"
           />
 
 
@@ -330,7 +302,7 @@ export default function AddTradeModal({
             value={formData.entry}
             onChange={handleChange}
             required
-            className="p-4 rounded-xl bg-black/20 border border-white/10"
+            className="p-4 rounded-xl bg-black/20 border border-white/10 outline-none text-white"
           />
 
 
@@ -345,7 +317,7 @@ export default function AddTradeModal({
             value={formData.exit}
             onChange={handleChange}
             required
-            className="p-4 rounded-xl bg-black/20 border border-white/10"
+            className="p-4 rounded-xl bg-black/20 border border-white/10 outline-none text-white"
           />
 
 
@@ -360,7 +332,7 @@ export default function AddTradeModal({
             value={formData.profit}
             onChange={handleChange}
             required
-            className="p-4 rounded-xl bg-black/20 border border-white/10 col-span-2"
+            className="p-4 rounded-xl bg-black/20 border border-white/10 outline-none text-white col-span-2"
           />
 
         </div>
@@ -380,7 +352,7 @@ export default function AddTradeModal({
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 bg-purple-600 hover:bg-purple-700 py-4 rounded-2xl font-semibold">
+            className="flex-1 bg-purple-600 hover:bg-purple-700 py-4 rounded-2xl font-semibold transition-all">
 
             {loading
 
@@ -400,7 +372,7 @@ export default function AddTradeModal({
           <button
             type="button"
             onClick={closeModal}
-            className="flex-1 bg-white/10 hover:bg-white/20 py-4 rounded-2xl">
+            className="flex-1 bg-white/10 hover:bg-white/20 py-4 rounded-2xl transition-all">
 
             Cancel
 
@@ -415,3 +387,4 @@ export default function AddTradeModal({
   );
 
 }
+

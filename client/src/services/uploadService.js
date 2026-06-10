@@ -29,7 +29,7 @@ async(file)=>{
 
   await api.post(
 
-    "/api/upload",
+    "/upload",
 
     formData,
 
@@ -80,7 +80,7 @@ async(file)=>{
 
   await api.post(
 
-    "/api/upload/trade",
+    "/upload/trade",
 
     formData,
 

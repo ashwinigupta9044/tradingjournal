@@ -1,7 +1,8 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
+
 
 
 // import Sidebar from "../components/layout/Sidebar";
@@ -16,10 +17,9 @@ import HomeNavbar from "../home/HomeNavbar";
 
 // import BillingHistory from "../components/subscription/BillingHistory";
 
+
+
 export default function Plan() {
-
-
-
 
   // =========================
   // STATES
@@ -40,36 +40,14 @@ export default function Plan() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/subscription",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/subscription"
 
       );
 
@@ -266,29 +244,21 @@ export default function Plan() {
 
   return (
 
-    <div className=" min-h-screen bg-[#050816] text-white">
-
-
-
-
-      {/* SIDEBAR */}
-
-      {/* <Sidebar /> */}
+    <div className="min-h-screen bg-[#050816] text-white">
 
 
 
 
       {/* MAIN */}
 
-      <div className="flex-1  p-8">
+      <div className="flex-1 p-8">
 
 
 
 
         {/* NAVBAR */}
 
-        {/* <Navbar /> */}
-             <HomeNavbar/>
+        <HomeNavbar />
 
 
 
@@ -323,20 +293,12 @@ export default function Plan() {
 
         </div>
 
-      {/* Biling History */}
-        {/* <div className="mt-8">
 
-          <BillingHistory />
-
-        </div> */}
 
 
         {/* PLANS */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
-
-
-
 
           {plans.map((plan,index)=>(
 
@@ -387,3 +349,4 @@ export default function Plan() {
   );
 
 }
+

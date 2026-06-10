@@ -1,6 +1,6 @@
 
-import axios from "axios";
 import api from "../../services/api";
+
 
 
 export default function PaymentButton({
@@ -59,6 +59,8 @@ export default function PaymentButton({
 
 
 
+
+
   // =========================
   // HANDLE PAYMENT
   // =========================
@@ -69,7 +71,7 @@ export default function PaymentButton({
     try{
 
       // =========================
-      // TOKEN
+      // CHECK LOGIN
       // =========================
 
       const token =
@@ -93,6 +95,7 @@ export default function PaymentButton({
         return;
 
       }
+
 
 
 
@@ -124,26 +127,15 @@ export default function PaymentButton({
 
 
 
+
       // =========================
       // GET PROFILE
       // =========================
 
       const profileResponse =
-      await axios.get(
+      await api.get(
 
-        "/api/profile",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/profile"
 
       );
 
@@ -158,12 +150,14 @@ export default function PaymentButton({
 
 
 
+
+
       // =========================
       // CREATE ORDER
       // =========================
 
       const response =
-      await axios.post(
+      await api.post(
 
         "/api/payment/create-order",
 
@@ -171,21 +165,10 @@ export default function PaymentButton({
 
           amount:Number(amount),
 
-        },
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
         }
 
       );
+
 
 
 
@@ -250,6 +233,7 @@ export default function PaymentButton({
 
 
 
+
       // =========================
       // RAZORPAY OPTIONS
       // =========================
@@ -299,6 +283,9 @@ export default function PaymentButton({
 
 
 
+
+
+
         // =========================
         // PAYMENT SUCCESS
         // =========================
@@ -308,7 +295,7 @@ export default function PaymentButton({
           try{
 
             const saveResponse =
-            await axios.post(
+            await api.post(
 
               "/api/payment/success",
 
@@ -326,18 +313,6 @@ export default function PaymentButton({
                 payment.razorpay_signature,
 
                 plan,
-
-              },
-
-              {
-
-                headers:{
-
-                  Authorization:
-
-                  `Bearer ${token}`
-
-                }
 
               }
 
@@ -403,6 +378,7 @@ export default function PaymentButton({
 
 
 
+
         // =========================
         // PREFILL
         // =========================
@@ -430,6 +406,7 @@ export default function PaymentButton({
 
 
 
+
         // =========================
         // THEME
         // =========================
@@ -441,6 +418,7 @@ export default function PaymentButton({
         },
 
       };
+
 
 
 
@@ -490,6 +468,7 @@ export default function PaymentButton({
     }
 
   };
+
 
 
 

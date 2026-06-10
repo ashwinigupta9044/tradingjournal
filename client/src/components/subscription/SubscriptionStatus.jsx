@@ -1,14 +1,11 @@
 
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
 
 
+
 export default function SubscriptionStatus() {
-
-
-
 
   // =========================
   // STATES
@@ -46,43 +43,23 @@ export default function SubscriptionStatus() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/subscription",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/subscription"
 
       );
 
 
 
 
+      // =========================
       // DATA
+      // =========================
 
       if(response.data){
 

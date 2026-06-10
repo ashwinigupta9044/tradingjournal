@@ -2,11 +2,15 @@
 import { useEffect,useState }
 from "react";
 
-import axios from "axios";
 import api from "../../services/api";
 
 
+
 export default function BillingHistory(){
+
+  // =========================
+  // STATES
+  // =========================
 
   const [history,setHistory] =
   useState([]);
@@ -14,37 +18,23 @@ export default function BillingHistory(){
 
 
 
+  // =========================
+  // FETCH HISTORY
+  // =========================
+
   const fetchHistory =
   async()=>{
 
     try{
 
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
+      // =========================
+      // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/subscription/history",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/subscription/history"
 
       );
 
@@ -59,7 +49,13 @@ export default function BillingHistory(){
 
     }catch(error){
 
-      console.log(error);
+      console.log(
+
+        error.response?.data ||
+
+        error.message
+
+      );
 
     }
 
@@ -67,6 +63,10 @@ export default function BillingHistory(){
 
 
 
+
+  // =========================
+  // LOAD
+  // =========================
 
   useEffect(()=>{
 

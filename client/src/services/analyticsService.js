@@ -14,7 +14,7 @@ async()=>{
 
   await api.get(
 
-    "/api/analytics"
+    "/analytics"
 
   );
 
@@ -37,7 +37,7 @@ async()=>{
 
   await api.get(
 
-    "/api/analytics/monthly"
+    "/analytics/monthly"
 
   );
 
@@ -60,7 +60,7 @@ async()=>{
 
   await api.get(
 
-    "/api/analytics/sessions"
+    "/analytics/sessions"
 
   );
 
@@ -83,7 +83,7 @@ async()=>{
 
   await api.get(
 
-    "/api/analytics/winrate"
+    "/analytics/winrate"
 
   );
 
@@ -106,7 +106,7 @@ async()=>{
 
   await api.get(
 
-    "/api/analytics/drawdown"
+    "/analytics/drawdown"
 
   );
 

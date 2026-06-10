@@ -1,6 +1,9 @@
+
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
+
+import api from "../../services/api";
 
 export default function ForgotPassword() {
 
@@ -11,21 +14,75 @@ export default function ForgotPassword() {
   const [email, setEmail] =
   useState("");
 
+  const [loading, setLoading] =
+  useState(false);
+
 
 
   // =========================
   // SUBMIT
   // =========================
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
+    setLoading(true);
+
+    try {
+
+      // =========================
+      // API
+      // =========================
+
+      const response =
+      await api.post(
+
+        "/auth/forgot-password",
+
+        {
+
+          email,
+
+        }
+
+      );
 
 
-    alert(
-      "Password reset link sent to email ✅"
-    );
+
+      alert(
+
+        response.data.message ||
+
+        "Password reset link sent ✅"
+
+      );
+
+    } catch (error) {
+
+      console.log(
+
+        error.response?.data ||
+
+        error.message
+
+      );
+
+
+
+      alert(
+
+        error.response?.data?.message ||
+
+        "Failed to send reset link ❌"
+
+      );
+
+    } finally {
+
+      setLoading(false);
+
+    }
 
   };
 
@@ -149,6 +206,7 @@ export default function ForgotPassword() {
             outline-none
             focus:border-purple-500
             transition-all
+            text-white
             "
 
           />
@@ -163,6 +221,8 @@ export default function ForgotPassword() {
 
           type="submit"
 
+          disabled={loading}
+
           className="
           w-full
           bg-gradient-to-r
@@ -176,11 +236,20 @@ export default function ForgotPassword() {
           font-semibold
           text-lg
           shadow-[0_0_40px_rgba(168,85,247,0.35)]
+          disabled:opacity-50
           "
 
         >
 
-          Send Reset Link
+          {
+
+            loading
+
+            ? "Sending..."
+
+            : "Send Reset Link"
+
+          }
 
         </button>
 
@@ -226,3 +295,4 @@ export default function ForgotPassword() {
   );
 
 }
+

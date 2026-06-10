@@ -1,7 +1,8 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
+
 
 
 export default function ProfileCard({
@@ -9,9 +10,6 @@ export default function ProfileCard({
   refresh,
 
 }) {
-
-
-
 
   // =========================
   // STATES
@@ -43,36 +41,14 @@ export default function ProfileCard({
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/profile",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/profile"
 
       );
 
@@ -111,36 +87,14 @@ export default function ProfileCard({
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/trades",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/trades"
 
       );
 
@@ -278,18 +232,18 @@ export default function ProfileCard({
         {/* AVATAR */}
 
         <img
-           src={
+          src={
 
-                profile?.avatar
+            profile?.avatar
 
-                ? `/${profile.avatar}`
+            ? `${import.meta.env.VITE_API_URL}/${profile.avatar}`
 
-                : "/avatar.png"
-
-              
+            : "/avatar.png"
 
           }
+
           alt="avatar"
+
           className="w-32 h-32 rounded-full object-cover border-4 border-purple-500"
         />
 
@@ -333,7 +287,9 @@ export default function ProfileCard({
 
         <p className="text-gray-400 mt-4 max-w-md">
 
-          {profile.bio ||
+          {
+
+            profile.bio ||
 
             "Passionate forex and crypto trader focused on risk management and consistency."
 
@@ -408,7 +364,7 @@ export default function ProfileCard({
 
                 }`}>
 
-              ${stats.totalProfit}
+              ${stats.totalProfit.toFixed(2)}
 
             </h3>
 
@@ -429,3 +385,4 @@ export default function ProfileCard({
   );
 
 }
+

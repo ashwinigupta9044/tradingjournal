@@ -1,15 +1,13 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
-
 
 import PricingCard from "./PricingCard";
 
+
+
 export default function PlanFeatures() {
-
-
-
 
   // =========================
   // STATES
@@ -30,36 +28,14 @@ export default function PlanFeatures() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/subscription",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/subscription"
 
       );
 
@@ -249,3 +225,4 @@ export default function PlanFeatures() {
   );
 
 }
+

@@ -1,13 +1,11 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../../services/api";
 
 
+
 export default function AvatarUpload() {
-
-
-
 
   // =========================
   // STATES
@@ -31,36 +29,14 @@ export default function AvatarUpload() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/profile",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/profile"
 
       );
 
@@ -75,7 +51,7 @@ export default function AvatarUpload() {
 
         setAvatar(
 
-          `/${response.data.avatar}`
+          `${import.meta.env.VITE_API_URL}/${response.data.avatar}`
 
         );
 
@@ -98,6 +74,10 @@ export default function AvatarUpload() {
 
 
 
+  // =========================
+  // LOAD
+  // =========================
+
   useEffect(()=>{
 
     fetchProfile();
@@ -116,7 +96,6 @@ export default function AvatarUpload() {
 
     const file =
     e.target.files[0];
-
 
 
 
@@ -149,22 +128,12 @@ export default function AvatarUpload() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.post(
+      await api.post(
 
         "/api/profile/avatar",
 
@@ -173,10 +142,6 @@ export default function AvatarUpload() {
         {
 
           headers:{
-
-            Authorization:
-
-            `Bearer ${token}`,
 
             "Content-Type":
 
@@ -193,7 +158,7 @@ export default function AvatarUpload() {
 
       setAvatar(
 
-        `/${response.data.avatar}`
+        `${import.meta.env.VITE_API_URL}/${response.data.avatar}`
 
       );
 
@@ -333,7 +298,9 @@ export default function AvatarUpload() {
 
             className="mt-6 px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-700 transition-all">
 
-            {loading
+            {
+
+              loading
 
               ? "Uploading..."
 
@@ -352,3 +319,4 @@ export default function AvatarUpload() {
   );
 
 }
+
