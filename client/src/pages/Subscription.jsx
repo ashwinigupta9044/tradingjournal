@@ -1,8 +1,7 @@
+
 import { useEffect,useState } from "react";
 
-import axios from "axios";
 import api from "../services/api";
-
 
 import Sidebar from "../components/layout/Sidebar";
 
@@ -14,10 +13,9 @@ import SubscriptionStatus from "../components/subscription/SubscriptionStatus";
 
 import BillingHistory from "../components/subscription/BillingHistory";
 
+
+
 export default function Subscription() {
-
-
-
 
   // =========================
   // STATES
@@ -25,7 +23,6 @@ export default function Subscription() {
 
   const [currentPlan,setCurrentPlan] =
   useState("Free");
-
 
 
 
@@ -38,41 +35,22 @@ export default function Subscription() {
 
     try{
 
-      // TOKEN
-
-      const token =
-      localStorage.getItem(
-
-        "token"
-
-      );
-
-
-
-
+      // =========================
       // API
+      // =========================
 
       const response =
-      await axios.get(
+      await api.get(
 
-        "/api/subscription",
-
-        {
-
-          headers:{
-
-            Authorization:
-
-            `Bearer ${token}`
-
-          }
-
-        }
+        "/api/subscription"
 
       );
 
 
 
+      // =========================
+      // SET PLAN
+      // =========================
 
       if(
 
@@ -92,6 +70,8 @@ export default function Subscription() {
 
       console.log(
 
+        "GET SUBSCRIPTION ERROR:",
+
         error.response?.data ||
 
         error.message
@@ -101,7 +81,6 @@ export default function Subscription() {
     }
 
   };
-
 
 
 
@@ -115,8 +94,9 @@ export default function Subscription() {
 
 
 
-
+    // =========================
     // LIVE REFRESH
+    // =========================
 
     const interval =
 
@@ -125,7 +105,6 @@ export default function Subscription() {
       fetchSubscription();
 
     },5000);
-
 
 
 
@@ -266,13 +245,9 @@ export default function Subscription() {
 
     <div className="flex min-h-screen bg-[#050816] text-white">
 
-
-
-
       {/* SIDEBAR */}
 
       <Sidebar />
-
 
 
 
@@ -280,13 +255,9 @@ export default function Subscription() {
 
       <div className="flex-1 ml-64 p-8">
 
-
-
-
         {/* NAVBAR */}
 
         <Navbar />
-
 
 
 
@@ -311,7 +282,6 @@ export default function Subscription() {
 
 
 
-
         {/* STATUS */}
 
         <div className="mt-8">
@@ -320,7 +290,10 @@ export default function Subscription() {
 
         </div>
 
-      {/* Biling History */}
+
+
+        {/* BILLING HISTORY */}
+
         <div className="mt-8">
 
           <BillingHistory />
@@ -328,12 +301,10 @@ export default function Subscription() {
         </div>
 
 
+
         {/* PLANS */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
-
-
-
 
           {plans.map((plan,index)=>(
 
@@ -349,9 +320,6 @@ export default function Subscription() {
 
               duration={plan.duration}
 
-
-
-
               active={
 
                 currentPlan === plan.title ||
@@ -365,9 +333,6 @@ export default function Subscription() {
                 )
 
               }
-
-
-
 
               features={plan.features}
 
@@ -384,3 +349,4 @@ export default function Subscription() {
   );
 
 }
+
