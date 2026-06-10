@@ -1,9 +1,16 @@
+
 import { useState } from "react";
 
-import { useNavigate, Link }
-from "react-router-dom";
+import {
+
+  useNavigate,
+  Link
+
+} from "react-router-dom";
 
 import api from "../../services/api";
+
+
 
 export default function LoginForm() {
 
@@ -71,7 +78,9 @@ export default function LoginForm() {
 
     try {
 
-      // API
+      // =========================
+      // API CALL
+      // =========================
 
       const response =
       await api.post(
@@ -90,7 +99,9 @@ export default function LoginForm() {
 
 
 
+      // =========================
       // SAVE TOKEN
+      // =========================
 
       if (response.data.token) {
 
@@ -106,15 +117,17 @@ export default function LoginForm() {
 
 
 
+      // =========================
       // SAVE USER ID
+      // =========================
 
-      if (response.data.user?._id) {
+      if (response.data._id) {
 
         localStorage.setItem(
 
           "userId",
 
-          response.data.user._id
+          response.data._id
 
         );
 
@@ -122,7 +135,9 @@ export default function LoginForm() {
 
 
 
+      // =========================
       // SUCCESS
+      // =========================
 
       alert(
         "Login Success ✅"
@@ -130,7 +145,9 @@ export default function LoginForm() {
 
 
 
+      // =========================
       // REDIRECT
+      // =========================
 
       navigate(
         "/dashboard"
@@ -227,6 +244,8 @@ export default function LoginForm() {
 
             required
 
+            value={formData.email}
+
             onChange={handleChange}
 
             className="
@@ -255,6 +274,8 @@ export default function LoginForm() {
             placeholder="Enter password"
 
             required
+
+            value={formData.password}
 
             onChange={handleChange}
 
@@ -382,3 +403,4 @@ export default function LoginForm() {
   );
 
 }
+
